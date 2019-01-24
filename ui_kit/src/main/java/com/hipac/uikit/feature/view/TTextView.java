@@ -267,7 +267,7 @@ public class TTextView extends AppCompatTextView implements ViewHelper,
 
 	@Override
 	public <O extends AbsFeature<? super TextView>> O findFeature(
-			Class<? extends AbsFeature<? super TextView>> clazz) {
+			Class<O> clazz) {
 		return mFeatureList.findFeature(clazz);
 	}
 

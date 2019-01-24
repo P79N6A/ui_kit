@@ -322,7 +322,7 @@ public class TRecyclerView extends RecyclerView implements ViewHelper, ViewGroup
     }
 
     @Override
-    public <O extends AbsFeature<? super RecyclerView>> O findFeature(Class<? extends AbsFeature<? super RecyclerView>> clazz) {
+    public <O extends AbsFeature<? super RecyclerView>> O findFeature(Class<O> clazz) {
         return mFeatureList.findFeature(clazz);
     }
 

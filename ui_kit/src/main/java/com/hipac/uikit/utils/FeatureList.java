@@ -79,7 +79,7 @@ public class FeatureList<T extends View> extends
 
     @Override
     @SuppressWarnings("unchecked")
-    public <O extends AbsFeature<? super T>> O findFeature(Class<? extends AbsFeature<? super T>> clazz) {
+    public <O extends AbsFeature<? super T>> O findFeature(Class<O> clazz) {
         for (AbsFeature<? super T> feature : this) {
             if (feature.getClass() == clazz) {
                 try {
