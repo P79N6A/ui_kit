@@ -3,13 +3,16 @@ package com.hipac.example.uikit;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.hipac.uikit.UIKitConfig;
+import com.hipac.uikit.feature.features.TrackEventFeature;
+import com.hipac.uikit.feature.view.TTextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,29 +24,17 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 UIKitConfig config = UIKitConfig.getInstance();
                 config.setHotMapEnable(isChecked);
-                requestLayout(findViewById(android.R.id.content));
+                Utils.requireInvalidate(MainActivity.this);
             }
         });
         switchView.setChecked(true);
-        findViewById(R.id.one).setOnClickListener(new View.OnClickListener() {
+        final TTextView textView = findViewById(R.id.one);
+        textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TrackEventFeature feature = textView.findFeature(TrackEventFeature.class);
+                feature.setTrackCode(String.valueOf(++count));
             }
         });
-    }
-
-    private void requestLayout(View view) {
-        if (view == null) {
-            return;
-        }
-        if (!(view instanceof ViewGroup)) {
-            view.invalidate();
-            return;
-        }
-        for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-            View child = ((ViewGroup) view).getChildAt(i);
-            requestLayout(child);
-        }
     }
 }

@@ -26,7 +26,7 @@
             android:text="1"
             android:textSize="30sp"
             app:uik_orientation="horizontal"
-            app:uik_ratio="1.0"
+            app:uik_ratio="0.5"
             app:uik_ratioFeature="true"
             app:uik_trackCode="6.6.6.6.6"
             app:uik_trackEventFeature="true"
