@@ -3,5 +3,5 @@
     android:layout_width="@dimen/uik_choice_width"
     android:layout_height="@dimen/uik_divider_height"
     android:background="@color/uik_choice_divider">
-    
+
 </View>
