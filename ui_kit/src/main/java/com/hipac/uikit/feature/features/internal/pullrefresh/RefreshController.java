@@ -274,8 +274,8 @@ public class RefreshController {
     }
 
     private void processActionMove(int distance, int tempY) {
-        if (mState == RELEASE_TO_REFRESH)                                 //松开刷新相邻的状态只可能是下拉刷新
-        {
+        if (mState == RELEASE_TO_REFRESH) {           //松开刷新相邻的状态只可能是下拉刷新
+
             if (mPullDirection == DOWN_PULL && mHeaderViewManager != null) {
                 //当超过一屏幕且head可见时 ，往上推动时候，除了附加的padding改变，
                 //列表本身在向下滑动，会导致数值出错，此时通过setpadding禁止列表滑动
@@ -304,8 +304,8 @@ public class RefreshController {
                 }
             }
 
-        } else if (mState == PULL_TO_REFRESH)                              //下拉刷新相邻的状态可能是松开刷新 可能是完全盖住的down状态
-        {
+        } else if (mState == PULL_TO_REFRESH) {                          //下拉刷新相邻的状态可能是松开刷新 可能是完全盖住的down状态
+
             //	mListView.setSelection(0);
             if (mPullDirection == DOWN_PULL && mHeaderViewManager != null) {
                 mEdgeJudge.keepTop();
@@ -315,12 +315,12 @@ public class RefreshController {
                 } else {
                     height = mHeaderViewManager.getImageHeight();
                 }
-                if (getTopRealScrollY(distance) >= height)         //head 完全露出
-                {
+                if (getTopRealScrollY(distance) >= height) {//head 完全露出
+
                     mState = RELEASE_TO_REFRESH;
                     mIsBack = true;
-                } else if (tempY - mStartY <= 0)                                //head 完全盖住
-                {
+                } else if (tempY - mStartY <= 0) {                              //head 完全盖住
+
                     mState = DONE;
                 }
                 changeHeaderViewByState();
@@ -341,8 +341,8 @@ public class RefreshController {
                     changeFooderProgressBarState(-distance / RATIO);
                 }
             }
-        } else if (mState == DONE)                                          //从完全盖住的done状态的相邻状态只可能是下拉刷新
-        {
+        } else if (mState == DONE) {                        //从完全盖住的done状态的相邻状态只可能是下拉刷新
+
             if (distance > 0 && mEdgeJudge.hasArrivedTopEdge()) {
                 mPullDirection = DOWN_PULL;
                 mState = PULL_TO_REFRESH;
@@ -356,8 +356,8 @@ public class RefreshController {
             }
         }
 
-        if (mState == PULL_TO_REFRESH || mState == RELEASE_TO_REFRESH)        // 更新headView的padding位置
-        {
+        if (mState == PULL_TO_REFRESH || mState == RELEASE_TO_REFRESH) {     // 更新headView的padding位置
+
             if (mPullDirection == DOWN_PULL && mHeaderViewManager != null) {
                 mHeaderViewManager.setPadding(0, -1 * mHeaderViewManager.getHeight() + getTopRealScrollY(distance), 0, 0);
             } else if (mPullDirection == UP_PULL && mFooterViewManager != null && !mUpPullFinish) {
