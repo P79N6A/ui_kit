@@ -80,7 +80,7 @@ public class FeatureFactory {
                 R.styleable.FeatureNameSpace_uik_rotateFeature,
                 PRIORITY_NORMAL));
         featureMap.put("ImageSaveFeature", new AttachInfo(
-                R.styleable.FeatureNameSpace_uik_imagesavefeature,
+                R.styleable.FeatureNameSpace_uik_imageSaveFeature,
                 PRIORITY_NORMAL));
         featureMap.put("CellAnimatorFeature", new AttachInfo(
                 R.styleable.FeatureNameSpace_uik_cellAnimatorFeature,
