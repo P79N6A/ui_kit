@@ -14,7 +14,6 @@ public abstract class AbsFeature<T extends View> {
     protected T mHost;
 
     public AbsFeature() {
-        constructor(null, null, 0);
     }
 
     public void setHost(T host) {
