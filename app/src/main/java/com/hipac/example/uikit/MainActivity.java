@@ -34,13 +34,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestLayout(View view) {
-        if (view instanceof ViewGroup) {
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-                View child = ((ViewGroup) view).getChildAt(i);
-                requestLayout(child);
-            }
+        if (view == null) {
             return;
         }
-        view.invalidate();
+        if (!(view instanceof ViewGroup)) {
+            view.invalidate();
+            return;
+        }
+        for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+            View child = ((ViewGroup) view).getChildAt(i);
+            requestLayout(child);
+        }
     }
 }
