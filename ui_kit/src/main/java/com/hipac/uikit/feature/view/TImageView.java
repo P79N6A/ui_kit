@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.hipac.uikit.feature.callback.CanvasCallback;
+import com.hipac.uikit.feature.callback.ClickCallback;
 import com.hipac.uikit.feature.callback.FocusCallback;
 import com.hipac.uikit.feature.callback.ImageSaveCallback;
 import com.hipac.uikit.feature.callback.LayoutCallback;
@@ -173,6 +174,50 @@ public class TImageView extends AppCompatImageView implements ViewHelper,
 		return result;
 	}
 
+    @Override
+    public boolean performClick() {
+        for (AbsFeature<? super ImageView> feature : mFeatureList) {
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).beforePerformClick();
+            }
+        }
+        boolean result = super.performClick();
+
+        for (int i = mFeatureList.size() - 1; i >= 0; i--) {
+            AbsFeature<? super ImageView> feature = mFeatureList.get(i);
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).afterPerformClick();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean performLongClick() {
+        for (AbsFeature<? super ImageView> feature : mFeatureList) {
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).beforePerformLongClick();
+            }
+            if (feature instanceof ImageSaveCallback) {
+                ((ImageSaveCallback) feature)
+                        .beforePerformLongClick();
+            }
+        }
+        boolean result = super.performLongClick();
+
+        for (int i = mFeatureList.size() - 1; i >= 0; i--) {
+            AbsFeature<? super ImageView> feature = mFeatureList.get(i);
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).afterPerformLongClick();
+            }
+            if (feature instanceof ImageSaveCallback) {
+                ((ImageSaveCallback) feature)
+                        .afterPerformLongClick();
+            }
+        }
+        return result;
+    }
+
 	@Override
 	public void setMeasuredDimension(long width, long height) {
 		super.setMeasuredDimension((int) width, (int) height);
@@ -231,28 +276,6 @@ public class TImageView extends AppCompatImageView implements ViewHelper,
 						.afterOnWindowFocusChanged(hasWindowFocus);
 			}
 		}
-	}
-
-	@Override
-	public boolean performLongClick() {
-		boolean result = false;
-		for (AbsFeature<? super ImageView> feature : mFeatureList) {
-			if (feature instanceof ImageSaveCallback) {
-				((ImageSaveCallback) feature)
-						.beforePerformLongClick();
-			}
-		}
-
-		result = super.performLongClick();
-
-		for (int i = mFeatureList.size() - 1; i >= 0; i--) {
-			AbsFeature<? super ImageView> feature = mFeatureList.get(i);
-			if (feature instanceof ImageSaveCallback) {
-				((ImageSaveCallback) feature)
-						.afterperformLongClick();
-			}
-		}
-		return result;
 	}
 
 	@Override

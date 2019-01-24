@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.hipac.uikit.feature.callback.CanvasCallback;
+import com.hipac.uikit.feature.callback.ClickCallback;
 import com.hipac.uikit.feature.callback.FocusCallback;
 import com.hipac.uikit.feature.callback.InterceptTouchEventCallback;
 import com.hipac.uikit.feature.callback.LayoutCallback;
@@ -168,6 +169,42 @@ public class TRelativeLayout extends RelativeLayout implements ViewHelper, ViewG
 		}
 		return result;
 	}
+
+    @Override
+    public boolean performClick() {
+        for (AbsFeature<? super RelativeLayout> feature : mFeatureList) {
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).beforePerformClick();
+            }
+        }
+        boolean result = super.performClick();
+
+        for (int i = mFeatureList.size() - 1; i >= 0; i--) {
+            AbsFeature<? super RelativeLayout> feature = mFeatureList.get(i);
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).afterPerformClick();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean performLongClick() {
+        for (AbsFeature<? super RelativeLayout> feature : mFeatureList) {
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).beforePerformLongClick();
+            }
+        }
+        boolean result = super.performLongClick();
+
+        for (int i = mFeatureList.size() - 1; i >= 0; i--) {
+            AbsFeature<? super RelativeLayout> feature = mFeatureList.get(i);
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).afterPerformLongClick();
+            }
+        }
+        return result;
+    }
 
 	@Override
 	protected void onFocusChanged(boolean gainFocus, int direction,

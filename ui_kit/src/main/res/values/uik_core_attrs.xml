@@ -11,6 +11,10 @@
     <attr name="uik_radiusY" format="dimension" />
     <attr name="uik_radius" format="dimension" />
 
+    <declare-styleable name="TrackEventFeature">
+        <attr name="uik_trackName" format="string" />
+        <attr name="uik_trackCode" format="string" />
+    </declare-styleable>
 
     <declare-styleable name="RotateFeature">
         <attr name="uik_roundX" format="dimension" />
@@ -171,6 +175,7 @@
         <attr name="uik_cellAnimatorFeature" format="boolean" />
         <attr name="uik_recyclerCellAnimatorFeature" format="boolean" />
         <attr name="uik_dragToRefreshFeature" format="boolean" />
+        <attr name="uik_trackEventFeature" format="boolean" />
     </declare-styleable>
 
     <!-- remote view  attrs-->

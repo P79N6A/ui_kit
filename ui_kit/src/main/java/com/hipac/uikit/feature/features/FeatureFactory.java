@@ -91,6 +91,9 @@ public class FeatureFactory {
         featureMap.put("DragToRefreshFeature", new AttachInfo(
                 R.styleable.FeatureNameSpace_uik_dragToRefreshFeature,
                 PRIORITY_NORMAL));
+        featureMap.put("TrackEventFeature", new AttachInfo(
+                R.styleable.FeatureNameSpace_uik_trackEventFeature,
+                PRIORITY_NORMAL));
     }
 
     public static <T extends View> ArrayList<AbsFeature<? super T>> creator(
@@ -106,8 +109,12 @@ public class FeatureFactory {
                 boolean flag = typedArray.getBoolean(id, false);
                 if (flag) {
                     try {
+                        Package selfPackage = mSelf.getClass().getPackage();
+                        if (selfPackage == null) {
+                            continue;
+                        }
                         @SuppressWarnings("unchecked")
-                        Class<AbsFeature<? super T>> clazz = (Class<AbsFeature<? super T>>) Class.forName(mSelf.getClass().getPackage().getName() + "." + feature);
+                        Class<AbsFeature<? super T>> clazz = (Class<AbsFeature<? super T>>) Class.forName(selfPackage.getName() + "." + feature);
                         features.add(clazz.newInstance());
                     } catch (ClassNotFoundException e) {
                         Log.e("Android UiKit", "can't find feature by id");

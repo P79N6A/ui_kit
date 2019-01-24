@@ -105,7 +105,7 @@ public class ImageSaveFeature extends AbsFeature<ImageView> implements ImageSave
     }
 
     @Override
-    public void afterperformLongClick() {
+    public void afterPerformLongClick() {
 
     }
 

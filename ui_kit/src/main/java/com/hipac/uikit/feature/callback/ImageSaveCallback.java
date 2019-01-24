@@ -29,5 +29,5 @@ public interface ImageSaveCallback {
 
     void beforePerformLongClick();
 
-    void afterperformLongClick();
+    void afterPerformLongClick();
 }

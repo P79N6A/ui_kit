@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.hipac.uikit.feature.callback.CanvasCallback;
+import com.hipac.uikit.feature.callback.ClickCallback;
 import com.hipac.uikit.feature.callback.FocusCallback;
 import com.hipac.uikit.feature.callback.LayoutCallback;
 import com.hipac.uikit.feature.callback.MeasureCallback;
@@ -163,6 +164,42 @@ public class TTextView extends AppCompatTextView implements ViewHelper,
 			AbsFeature<? super TextView> feature = mFeatureList.get(i);
 			if (feature instanceof TouchEventCallback) {
 				((TouchEventCallback) feature).afterDispatchTouchEvent(event);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public boolean performClick() {
+		for (AbsFeature<? super TextView> feature : mFeatureList) {
+			if (feature instanceof ClickCallback) {
+				((ClickCallback) feature).beforePerformClick();
+			}
+		}
+		boolean result = super.performClick();
+
+		for (int i = mFeatureList.size() - 1; i >= 0; i--) {
+			AbsFeature<? super TextView> feature = mFeatureList.get(i);
+			if (feature instanceof ClickCallback) {
+				((ClickCallback) feature).afterPerformClick();
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public boolean performLongClick() {
+		for (AbsFeature<? super TextView> feature : mFeatureList) {
+			if (feature instanceof ClickCallback) {
+				((ClickCallback) feature).beforePerformLongClick();
+			}
+		}
+		boolean result = super.performLongClick();
+
+		for (int i = mFeatureList.size() - 1; i >= 0; i--) {
+			AbsFeature<? super TextView> feature = mFeatureList.get(i);
+			if (feature instanceof ClickCallback) {
+				((ClickCallback) feature).afterPerformLongClick();
 			}
 		}
 		return result;

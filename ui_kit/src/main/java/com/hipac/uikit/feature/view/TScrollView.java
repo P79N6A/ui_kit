@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 import com.hipac.uikit.feature.callback.CanvasCallback;
+import com.hipac.uikit.feature.callback.ClickCallback;
 import com.hipac.uikit.feature.callback.FocusCallback;
 import com.hipac.uikit.feature.callback.InterceptTouchEventCallback;
 import com.hipac.uikit.feature.callback.LayoutCallback;
@@ -185,6 +186,42 @@ public class TScrollView extends ScrollView implements ViewHelper, ViewGroupHelp
             AbsFeature<? super ScrollView> feature = mFeatureList.get(i);
             if (feature instanceof TouchEventCallback) {
                 ((TouchEventCallback) feature).afterDispatchTouchEvent(event);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean performClick() {
+        for (AbsFeature<? super ScrollView> feature : mFeatureList) {
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).beforePerformClick();
+            }
+        }
+        boolean result = super.performClick();
+
+        for (int i = mFeatureList.size() - 1; i >= 0; i--) {
+            AbsFeature<? super ScrollView> feature = mFeatureList.get(i);
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).afterPerformClick();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean performLongClick() {
+        for (AbsFeature<? super ScrollView> feature : mFeatureList) {
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).beforePerformLongClick();
+            }
+        }
+        boolean result = super.performLongClick();
+
+        for (int i = mFeatureList.size() - 1; i >= 0; i--) {
+            AbsFeature<? super ScrollView> feature = mFeatureList.get(i);
+            if (feature instanceof ClickCallback) {
+                ((ClickCallback) feature).afterPerformLongClick();
             }
         }
         return result;
