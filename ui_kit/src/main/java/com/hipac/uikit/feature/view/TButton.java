@@ -264,7 +264,7 @@ public class TButton extends AppCompatButton implements ViewHelper, IFeatureList
     }
 
     @Override
-    public AbsFeature<? super Button> findFeature(
+    public <O extends AbsFeature<? super Button>> O findFeature(
             Class<? extends AbsFeature<? super Button>> clazz) {
         return mFeatureList.findFeature(clazz);
     }

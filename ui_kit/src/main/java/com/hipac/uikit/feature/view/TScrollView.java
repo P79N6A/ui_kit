@@ -343,7 +343,7 @@ public class TScrollView extends ScrollView implements ViewHelper, ViewGroupHelp
     }
 
     @Override
-    public AbsFeature<? super ScrollView> findFeature(Class<? extends AbsFeature<? super ScrollView>> clazz) {
+    public <O extends AbsFeature<? super ScrollView>> O findFeature(Class<? extends AbsFeature<? super ScrollView>> clazz) {
         return mFeatureList.findFeature(clazz);
     }
 

@@ -325,7 +325,7 @@ public class TListView extends ListView implements OnScrollListener, ViewHelper,
     }
 
     @Override
-    public AbsFeature<? super ListView> findFeature(Class<? extends AbsFeature<? super ListView>> clazz) {
+    public <O extends AbsFeature<? super ListView>> O findFeature(Class<? extends AbsFeature<? super ListView>> clazz) {
         return mFeatureList.findFeature(clazz);
     }
 

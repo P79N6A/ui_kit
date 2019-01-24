@@ -295,7 +295,7 @@ public class TRelativeLayout extends RelativeLayout implements ViewHelper, ViewG
 	}
 
 	@Override
-	public AbsFeature<? super RelativeLayout> findFeature(
+	public <O extends AbsFeature<? super RelativeLayout>> O findFeature(
 			Class<? extends AbsFeature<? super RelativeLayout>> clazz) {
 		return mFeatureList.findFeature(clazz);
 	}

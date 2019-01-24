@@ -295,7 +295,7 @@ public class TLinearLayout extends LinearLayout implements ViewHelper, ViewGroup
     }
 
     @Override
-    public AbsFeature<? super LinearLayout> findFeature(
+    public <O extends AbsFeature<? super LinearLayout>> O findFeature(
             Class<? extends AbsFeature<? super LinearLayout>> clazz) {
         return mFeatureList.findFeature(clazz);
     }

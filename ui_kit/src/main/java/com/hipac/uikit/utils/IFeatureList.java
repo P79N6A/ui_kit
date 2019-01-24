@@ -10,7 +10,7 @@ public interface IFeatureList<T extends View> {
 
     boolean addFeature(AbsFeature<? super T> feature);
 
-    AbsFeature<? super T> findFeature(Class<? extends AbsFeature<? super T>> clazz);
+    <O extends AbsFeature<? super T>> O findFeature(Class<? extends AbsFeature<? super T>> clazz);
 
     boolean removeFeature(Class<? extends AbsFeature<? super T>> clazz);
 

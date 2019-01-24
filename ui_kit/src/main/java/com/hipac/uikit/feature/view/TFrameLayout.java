@@ -295,7 +295,7 @@ public class TFrameLayout extends FrameLayout implements ViewHelper, ViewGroupHe
     }
 
     @Override
-    public AbsFeature<? super FrameLayout> findFeature(
+    public <O extends AbsFeature<? super FrameLayout>> O findFeature(
             Class<? extends AbsFeature<? super FrameLayout>> clazz) {
         return mFeatureList.findFeature(clazz);
     }

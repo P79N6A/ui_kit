@@ -294,7 +294,7 @@ public class TImageView extends AppCompatImageView implements ViewHelper,
 	}
 
 	@Override
-	public AbsFeature<? super ImageView> findFeature(
+	public <O extends AbsFeature<? super ImageView>> O findFeature(
 			Class<? extends AbsFeature<? super ImageView>> clazz) {
 		return mFeatureList.findFeature(clazz);
 	}

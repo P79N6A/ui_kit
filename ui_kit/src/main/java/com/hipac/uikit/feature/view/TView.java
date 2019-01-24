@@ -263,7 +263,7 @@ public class TView extends View implements ViewHelper, IFeatureList<View> {
     }
 
     @Override
-    public AbsFeature<? super View> findFeature(
+    public <O extends AbsFeature<? super View>> O findFeature(
             Class<? extends AbsFeature<? super View>> clazz) {
         return mFeatureList.findFeature(clazz);
     }
