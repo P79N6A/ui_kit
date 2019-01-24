@@ -1,10 +1,6 @@
-/**
- *
- */
 package com.hipac.uikit.feature.features;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -79,7 +75,7 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
     /**
      * set the page position
      *
-     * @param pagePosition
+     * @param pagePosition pagePosition
      */
     public void setPagePosition(int pagePosition) {
         mPagePosition = pagePosition;
@@ -117,7 +113,7 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
                     float percent = dividerTop / totalHeight;
                     float half = (1.0f - ((float) dividerView.getHeight() + mFirstPageBottomOffset)
                             / mHost.getHeight()) / 2.0f;
-                    Page page = Page.NONE;
+                    Page page;
                     if (percent > half) {
                         page = Page.FIRST;
                     } else {
@@ -229,7 +225,6 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
                 scrollToLastPageTop(dividerView);
                 sendLocalBroadcastManager(0.1f, 0.5f, false);
             }
-            return;
         }
     }
 
@@ -240,23 +235,16 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
         mHost.post(new Runnable() {
             @Override
             public void run() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    mHost.smoothScrollToPositionFromTop(mPagePosition + 1, 0,
-                            duration);
-                    mHost.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mPageState == PageState.Asjusting) {
-                                mPageState = PageState.Complete;
-                            }
+                mHost.smoothScrollToPositionFromTop(mPagePosition + 1, 0,
+                        duration);
+                mHost.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mPageState == PageState.Asjusting) {
+                            mPageState = PageState.Complete;
                         }
-                    }, duration);
-                } else {
-                    mHost.setSelectionFromTop(mPagePosition + 1, 0);
-                    if (mPageState == PageState.Asjusting) {
-                        mPageState = PageState.Complete;
                     }
-                }
+                }, duration);
 
             }
         });
@@ -275,23 +263,16 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
         mHost.post(new Runnable() {
             @Override
             public void run() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    mHost.smoothScrollToPositionFromTop(mPagePosition,
-                            offsetFromTop, duration);
-                    mHost.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mPageState == PageState.Asjusting) {
-                                mPageState = PageState.Complete;
-                            }
+                mHost.smoothScrollToPositionFromTop(mPagePosition,
+                        offsetFromTop, duration);
+                mHost.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mPageState == PageState.Asjusting) {
+                            mPageState = PageState.Complete;
                         }
-                    }, duration);
-                } else {
-                    mHost.setSelectionFromTop(mPagePosition, offsetFromTop);
-                    if (mPageState == PageState.Asjusting) {
-                        mPageState = PageState.Complete;
                     }
-                }
+                }, duration);
 
             }
         });
@@ -300,7 +281,7 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
     /**
      * set firstPageBottomOffset
      *
-     * @param firstPageBottomOffset
+     * @param firstPageBottomOffset firstPageBottomOffset
      */
     public void setFirstPageBottomOffset(int firstPageBottomOffset) {
         this.mFirstPageBottomOffset = firstPageBottomOffset;
@@ -309,7 +290,7 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
     /**
      * set the animationDuration
      *
-     * @param animationDuration
+     * @param animationDuration animationDuration
      */
     public void setAnimationDuration(int animationDuration) {
         this.mAnimationDuration = animationDuration;
@@ -318,7 +299,7 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
     /**
      * set touchOffsetLimit
      *
-     * @param touchOffsetLimit
+     * @param touchOffsetLimit touchOffsetLimit
      */
     public void setTouchOffsetLimit(float touchOffsetLimit) {
         mTouchOffset.setOffsetLimit(touchOffsetLimit);
@@ -327,7 +308,7 @@ public class BinaryPageFeature extends AbsFeature<ListView> implements
     /**
      * set OnPageChangedListener
      *
-     * @param pageChangedListener
+     * @param pageChangedListener pageChangedListener
      */
     public void setOnPageChangedListener(
             OnPageChangedListener pageChangedListener) {
